@@ -18,11 +18,11 @@ func ClientStart() {
 	if err != nil {
 		log.Fatalf("Err connecting to server : %v", err)
 	}
-	resp.Body.Close()
+	defer resp.Body.Close()
 	log.Printf("Recieved response status : %v", string(resp.Status))
-	body, err := io.ReadAll(resp.Body)
+	_, err = io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatalf("Failed to read the resp.body : %v", err)
 	}
-	log.Println("Body data : ", string(body))
+	// log.Println("Body data : ", string(body))
 }
